@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <title>SUPER HEAVY PIAZZA</title>
+    <script src="/static/scripts/lib/jquery.min.js"></script>
+    <script src="/static/scripts/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/styles/styles.css"/>
+  </head>
+  <body>
+    <div class="nav">
+      <h2 class="center">Super Piazza Heavy</h2>
+      <% if (name) { %>
+      <p>Hi <%= name %> |
+      <button id=logout> Log out</a>
+      </p>
+      <% } %>
+    </div>
+    <div class="main-body">
+      <div class="left-col">
+      <% if (name) { %>
+      <a href="#" class="btn" id="new-post">Add new post + </a>
+      <div id="submit-modal" class="modal" style="display:none">
+        <div class="question-area">
+          <textarea type="text" id="post-text">
+          Add Post:
+          </textarea>
+          <a class="btn" type="submit" id="submit-question">Submit question</a>
+          <a class="btn" type="submit" id="submit-statement">Submit Statement</a>
+          <a class="btn" id="close">Close</a>
+        </div>
+      </div>
+      <% } else { %>
+      <a class="btn" href="/account/login">Log in to submit a post</a>
+      <% } %>
+      <ul id="posts">
+        <% if (typeof posts == 'object') { %>
+          <% posts.forEach(function(p) { %>
+          <li data-pid=<%= p.id %>><%= p.text %></li>
+          <li data-pid=<%= p.id %>><%= p.author %></li>
+          <li data-pid=<%= p.id %>><%= p.authorType %></li>
+          <% })
+        } %>
+      </ul>
+      </div>
+      <div class="right-col">
+        <div id="show-post" style="display:none">
+            <div id="post-info">
+              <strong id="post-type"> </strong> </br>
+              <p id="post"></p>
+              Author: <strong id="author"></strong> </br>
+              Reply: <p id="answer-text"></p>
+            </div>
+            <br/><br/>
+            <% if (name) { %>
+            <textarea id="answer"></textarea>
+            <a class="btn" type="submit" id="submitAnswer">Submit Reply</a>
+            <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

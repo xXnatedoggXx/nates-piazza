@@ -1,0 +1,70 @@
+<html>
+        <head>
+          <title>Sign up page</title>
+        </head>
+        <body>
+          <h1>Sign up</h1>
+          <div> Passwords must be at least 8 characters </div>
+          <div> <br/> </div>
+          <form name="signupform" method="POST">
+            Name: <br/>
+            <input type="text" name="name"/> <br/>
+            Username: <br/>
+            <input type="text" name="username"/> <br/>
+            Password: <br/>
+            <input type="password" name="password"/> <br/>
+            Confirm Password: <br/>
+            <input type="password" name="confirmpassword"/> <br/>
+            code: <br/>
+            <input type="text" name="code"/> <br/>
+            <button id="submit-button" type="submit">Sign up</button>
+          </form>
+
+          <div id="error-message"></div>
+
+          <script>
+            document.getElementById("submit-button").addEventListener("click", function(event) {
+              var bool = !validate();
+              if(bool)
+                event.preventDefault();
+            });
+
+            function validate() {
+
+             if(document.signupform.name.value == "") {   //checking if the form is empty
+               document.getElementById('error-message').innerHTML="*Please enter a name*";
+               return false;
+             } else if(document.signupform.username.value == "") {
+               document.getElementById('error-message').innerHTML="*Please enter a username*";
+               return false;
+             } else if(document.signupform.password.value.length < 8) {
+               document.getElementById('error-message').innerHTML="*Password must be at least 8 characters long*";
+               return false;
+             } else if(document.signupform.confirmpassword.value !== document.signupform.password.value) {
+               document.getElementById('error-message').innerHTML="*Passwords must match*";
+               return false;
+             } else if(document.signupform.password.value === document.signupform.username.value) {
+               document.getElementById('error-message').innerHTML="*Username and Password cannot match*";
+               return false;
+             } else if(document.signupform.code.value !== 'student' && document.signupform.code.value !== 'instructor') {
+               document.getElementById('error-message').innerHTML="*Invalid Code*";
+               return false;
+             } else {
+               var img = document.createElement("img");
+               img.src = "/static/images/simpson.gif";
+               img.height = 350;
+               img.width = 700;
+               img.setAttribute("class", "center");
+               document.body.appendChild(img);
+               document.getElementById('error-message').innerHTML="*LOADING...*";
+               return true;
+             }
+            }
+          </script>
+
+        </body>
+      </html>
+it">Log in</button>
+      <div> Login could take a few seconds </div>
+  </body>
+</html>
